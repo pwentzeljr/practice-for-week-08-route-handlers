@@ -37,35 +37,35 @@ const server = http.createServer((req, res) => {
     if (req.method === 'GET' && req.url === '/') {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'text/plain');
-      res.end('Dog Club');
+      return res.end('Dog Club');
     }
 
     if (req.method === 'GET' && req.url === '/dogs') {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'text/plain');
-      res.end('Dogs index');
+      return res.end('Dogs index');
     }
 
     if (req.method === 'GET' && req.url === '/dogs/new') {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'text/plain');
-      res.end('Dog create form page')
+      return res.end('Dog create form page')
     }
 
     if (req.method === 'GET' && req.url === '/dogs/new') {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'text/plain');
-      res.end('Dog create form page')
+      return res.end('Dog create form page')
     }
 
     if (req.method === 'POST' && req.url === '/dogs') {
       res.statusCode = 302;
       const newID = getNewDogId();
       res.setHeader('Location', `/dogs/${newID}`);
-      res.end();
+      return res.end();
     }
 
-    const pathArr = res.url.split('/');
+    const pathArr = req.url.split('/');
 
     if (req.method === 'GET' &&
         req.url.startsWith('/dogs/') &&
@@ -73,7 +73,7 @@ const server = http.createServer((req, res) => {
     ) {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'text/plain');
-      res.end(`Dog details for ${pathArr[2]}`);
+      return res.end(`Dog details for ${pathArr[2]}`);
     }
 
     if (req.method === 'GET' &&
@@ -83,7 +83,7 @@ const server = http.createServer((req, res) => {
     ) {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'text/plain');
-      res.end(`Dog edit page for ${pathArr[2]}`);
+      return res.end(`Dog edit page for ${pathArr[2]}`);
     }
 
     if (req.method === 'POST' &&
@@ -92,7 +92,7 @@ const server = http.createServer((req, res) => {
     ) {
       res.statusCode = 302;
       res.setHeader('Location', `/dogs/${pathArr[2]}`);
-      res.end();
+      return res.end();
     }
 
 
